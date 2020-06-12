@@ -74,6 +74,7 @@ public class socketSource
     {
         String serverResponse;
         messageData.println("You have intiated a chat session with: " + currentUsername+ "\n");
+        messageData.printf(currentUsername+":");
         messageData.flush();
         //if((clientResponse = retrievedData.readLine()) != null)
 	    //{
@@ -86,7 +87,7 @@ public class socketSource
     {
         while(true)
         {
-             try 
+             try
              {
                  String clientResponse;
                  if((clientResponse = retrievedData.readLine()) != null)
@@ -96,25 +97,25 @@ public class socketSource
              }
              catch (IOException error)
              {
-                  
+
              }
         }
     }
     });
         captureMessage.start();
-        System.out.println("\nThe introduction has been concluded.\n");
-        
+        System.out.println("\n[The introduction has been concluded.]\n");
+
         while(true)
 	{
 	    //if((clientResponse = retrievedData.readLine()) != null)
 	    //{
 		//System.out.printf(clientResponse + "\n");
 	    //}
-            System.out.printf(currentUsername + ": ");
+            //System.out.printf(currentUsername + ": ");
 	    serverResponse = currentUsername +": " + messageStoreObject.readLine();
 	    messageData.println(serverResponse);
 	    messageData.flush();
-	    
+
 	}
     }
     public static void main(String Args[]) throws IOException
@@ -130,9 +131,9 @@ public class socketSource
         InputStream receivedData = generateInputObject(chatAppServerAcceptance);
         BufferedReader retrievedData = generateRecReaderObject(receivedData);
 	System.out.printf("Now the client of the chat app is booted. Please proceed to enter your name. \n");
-        
+
         String currentUsername = usernameInput();
-        
+
         activateClientToChat(messageStoreObject, messageData, retrievedData, currentUsername);
     }
 }

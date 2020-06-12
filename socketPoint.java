@@ -14,7 +14,7 @@
  * Reference: https://stackoverflow.com/questions/32707583/local-variables-referenced-from-an-inner-class-must-be-final-or-effectively-fina
  * Reference: https://www.geeksforgeeks.org/runnable-interface-in-java/
  * Reference: http://forums.devx.com/showthread.php?174141-ERROR-Class-is-not-abstract-and-does-not-override-abstract-method
- * 
+ *
  */
 //Add thread for receiving only.
 import java.io.*;
@@ -71,7 +71,8 @@ public class socketPoint
     {
         //String serverResponse;
 	String clientResponse;
-        messageData.println("\nYou have intiated a chat session with: " + currentUsername +"\n");
+        messageData.println("\n[You have intiated a chat session with: " + currentUsername +"]\n");
+        messageData.printf(currentUsername +": ");
         messageData.flush();
         /*if((serverResponse = retrievedData.readLine()) != null)
 	    {
@@ -85,7 +86,7 @@ public class socketPoint
     {
         while(true)
         {
-             try 
+             try
              {
                  String serverResponse;
                  if((serverResponse = retrievedData.readLine()) != null)
@@ -95,18 +96,18 @@ public class socketPoint
              }
              catch (IOException error)
              {
-                  
+
              }
         }
     }
     });
         captureMessage.start();
-        System.out.println("\nThe introduction has been concluded.\n");
+        System.out.println("\n[The introduction has been concluded.]\n");
 
-        
+
         while(true)
         {
-            System.out.printf(currentUsername + ": ");
+            //System.out.printf(currentUsername + ": ");
 	    clientResponse = currentUsername +": " + messageStoreObject.readLine();
 	    messageData.println(clientResponse);
 	    messageData.flush();
@@ -116,8 +117,8 @@ public class socketPoint
 	    //}
 	}
     }
-    
-    
+
+
     public static void main(String Args[]) throws IOException
     {
         Socket chatAppClient = creationForSocket();
@@ -129,9 +130,9 @@ public class socketPoint
         InputStream receivedData = generateInputObject(chatAppClient);
         BufferedReader retrievedData = generateRecReaderObject(receivedData);
 	System.out.printf("Now the client of the chat app is booted. Please proceed to enter your name. \n");
-        
+
         String currentUsername = usernameInput();
-        
+
         activateClientToChat(messageStoreObject, messageData, retrievedData, currentUsername);
     }
 }
@@ -152,7 +153,7 @@ public class socketPointListen implements Runnable
     {
         while(true)
         {
-             try 
+             try
              {
                  if((serverResponse = retrievedData.readLine()) != null)
 	         {
@@ -161,7 +162,7 @@ public class socketPointListen implements Runnable
              }
              catch (IOException error)
              {
-                  
+
              }
         }
     }
